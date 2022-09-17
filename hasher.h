@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <random>
 
 using std::string;
 
@@ -12,4 +13,7 @@ public:
 private:
     string hash;
     const static int hashLength = 64;
+    const string hashSymbols = "0123456789abcdef";
+
+    string generateHash(int seed);
 };
