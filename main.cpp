@@ -5,12 +5,14 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-int main()
+int main(int argc, char **argv)
 {
-    Hasher hasher;
+    if (argc <= 1)
+        return 0;
 
-    hasher.hashString("test string");
-    cout << hasher.getHashed() << endl;
+    Hasher hasher;
+    hasher.hashString(argv[1]);
+    cout << argv[1] << " " << hasher.getHashed() << endl;
 
     return 0;
 }
