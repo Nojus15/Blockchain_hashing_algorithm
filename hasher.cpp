@@ -7,7 +7,8 @@ string Hasher::getHashed()
 
 void Hasher::hashString(string stringToHash)
 {
-    this->hash = generateHash(10);
+    int seed = this->getSeed(stringToHash);
+    this->hash = generateHash(seed);
 }
 
 string Hasher::generateHash(int seed)
@@ -22,3 +23,13 @@ string Hasher::generateHash(int seed)
     }
     return tmp_s;
 }
+int Hasher::getSeed(string stringToHash)
+{
+    int seed = 0;
+
+    for (size_t i = 0; i < stringToHash.length(); i++)
+    {
+        seed += stringToHash[i] * (i + 1);
+    }
+    return seed;
+};

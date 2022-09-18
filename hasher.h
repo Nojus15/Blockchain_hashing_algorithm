@@ -16,4 +16,5 @@ private:
     const string hashSymbols = "0123456789abcdef";
 
     string generateHash(int seed);
+    int getSeed(string stringToHash);
 };
