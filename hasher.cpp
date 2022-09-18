@@ -7,6 +7,9 @@ string Hasher::getHashed()
 
 void Hasher::hashString(string stringToHash)
 {
+    if (stringToHash.empty())
+        throw std::invalid_argument("No text provided");
+
     int seed = this->getSeed(stringToHash);
     this->hash = generateHash(seed);
 }
