@@ -1,4 +1,4 @@
-#include "./generator.h"
+#include "Generator.h"
 
 void Generator::genFile(std::string fileName, size_t symbolCount)
 {

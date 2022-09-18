@@ -1,4 +1,4 @@
-#include "hasher.h"
+#include "Hasher.h"
 
 string Hasher::getHashed()
 {

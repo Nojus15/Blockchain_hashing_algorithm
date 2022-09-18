@@ -1,6 +1,6 @@
 #include <iostream>
-#include "hasher.h"
-#include "generator.h"
+#include "../Hasher/Hasher.h"
+#include "../Generator/Generator.h"
 #include <string>
 
 using std::cin;
