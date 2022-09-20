@@ -1,11 +1,6 @@
 #include "Hasher.h"
 
-string Hasher::getHashed()
-{
-    return this->hash;
-}
-
-void Hasher::hashString(string stringToHash)
+string Hasher::hashString(string stringToHash)
 {
     if (stringToHash.empty())
         throw std::invalid_argument("No text provided");
