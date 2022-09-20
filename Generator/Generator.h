@@ -16,7 +16,10 @@ using std::stringstream;
 using std::to_string;
 
 static const char charSet[] =
-    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=~`,./;'[]<>?:{}|\"\\*";
+    "0123456789"
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    "abcdefghijklmnopqrstuvwxyz";
+// "!@#$%^&*()_+-=~`,./;'[]<>?:{}|\"\\*";
 
 static std::random_device rd;
 static std::mt19937 mt(rd());

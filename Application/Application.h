@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../Hasher/Hasher.h"
 #include "../Generator/Generator.h"
+#include "../Tester/Tester.h"
 #include <string>
 
 using std::cin;
@@ -12,7 +13,8 @@ enum AppMode
 {
     GenFile,
     HashFile,
-    HashLine
+    HashLine,
+    TestCollisions,
 };
 
 class Application
@@ -23,6 +25,7 @@ private:
     string text;
     AppMode mode;
     Hasher hasher;
+    Tester tester;
 
     void openFile(std::ifstream &open_f, string file_name);
     void readFile(string file_name);

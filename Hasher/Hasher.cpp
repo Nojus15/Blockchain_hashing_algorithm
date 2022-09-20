@@ -6,7 +6,7 @@ string Hasher::hashString(string stringToHash)
         throw std::invalid_argument("No text provided");
 
     int seed = this->getSeed(stringToHash);
-    this->hash = generateHash(seed);
+    return generateHash(seed);
 }
 
 string Hasher::generateHash(int seed)

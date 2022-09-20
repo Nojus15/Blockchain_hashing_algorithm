@@ -15,9 +15,8 @@ void Application::run()
         findMode();
         processMode();
 
-        hasher.hashString(this->text);
         cout << text << endl;
-        cout << hasher.getHashed() << endl;
+        cout << hasher.hashString(this->text) << endl;
     }
     catch (const std::exception &e)
     {
@@ -62,6 +61,17 @@ void Application::processMode()
             throw std::invalid_argument("Invalid argument: -hashLine used incorrectly");
         this->text = argv[2];
         break;
+    case AppMode::TestCollisions:
+        if (this->argc != 5)
+            throw std::invalid_argument("Invalid argument: -hashLine used incorrectly");
+        {
+            int count = std::atoi(this->argv[2]);
+            int symbolCount = std::atoi(this->argv[3]);
+            string resFileName = this->argv[4];
+            tester.runTests(count, symbolCount, resFileName);
+            exit(0);
+        }
+        break;
 
     default:
         break;
@@ -93,5 +103,11 @@ void Application::findMode()
         this->mode = AppMode::HashLine;
         return;
     }
+    if (modeArg == "-testCollisions")
+    {
+        this->mode = AppMode::TestCollisions;
+        return;
+    }
+
     throw std::invalid_argument("Mode not found");
 }
