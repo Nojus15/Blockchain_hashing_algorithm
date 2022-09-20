@@ -7,7 +7,7 @@ void Generator::genFile(std::string fileName, size_t symbolCount)
     {
         out_ss << charSet[dist(mt)];
     }
-    std::ofstream out_f(fileName);
+    std::ofstream out_f("txt_files/" + fileName);
     out_f << out_ss.rdbuf();
     out_f.close();
 }

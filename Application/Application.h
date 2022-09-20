@@ -6,6 +6,7 @@
 using std::cin;
 using std::cout;
 using std::endl;
+using std::string;
 
 enum AppMode
 {
@@ -13,6 +14,7 @@ enum AppMode
     HashFile,
     HashLine
 };
+
 class Application
 {
 private:
