@@ -2,12 +2,17 @@
 
 void Generator::genFile(std::string fileName, size_t symbolCount)
 {
-    std::stringstream out_ss;
+    std::ofstream out_f("txt_files/" + fileName);
+    out_f << this->genStringstream(symbolCount).rdbuf();
+    out_f.close();
+}
+
+stringstream Generator::genStringstream(size_t symbolCount)
+{
+    stringstream out_ss;
     for (size_t i = 1; i <= symbolCount; i++)
     {
         out_ss << charSet[dist(mt)];
     }
-    std::ofstream out_f("txt_files/" + fileName);
-    out_f << out_ss.rdbuf();
-    out_f.close();
+    return out_ss;
 }

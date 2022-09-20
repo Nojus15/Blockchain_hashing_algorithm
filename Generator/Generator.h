@@ -12,6 +12,7 @@ using std::cout;
 using std::endl;
 using std::mt19937;
 using std::string;
+using std::stringstream;
 using std::to_string;
 
 static const char charSet[] =
@@ -25,4 +26,5 @@ class Generator
 {
 public:
     void genFile(string fileName, size_t symbolCount);
+    stringstream genStringstream(size_t symbolCount);
 };
