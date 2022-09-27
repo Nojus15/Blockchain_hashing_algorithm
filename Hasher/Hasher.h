@@ -5,6 +5,7 @@
 #include <vector>
 #include <bitset>
 #include <sstream>
+#include <iomanip>
 
 using std::bitset;
 using std::cout;
@@ -22,15 +23,19 @@ private:
     const string hashSymbols = "0123456789abcdef";
 
     string text;
+    string binaryTextStr;
     stringstream binaryText;
 
-    string generateHash(int seed);
-    int getSeed(string stringToHash);
+    size_t addedBits = 0;
 
+    string addBinary(string b1, string b2);
     void convertToBinary();
     void makeMultipleOf512();
     void makeRotations();
     string rotateRight(int posCount, string block);
     string rotateLeft(int posCount, string block);
+    string shiftRight(int posCount, string block);
+    string shiftLeft(int posCount, string block);
     void modifyAddedZeros();
+    string convertBinaryToHex();
 };

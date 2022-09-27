@@ -16,7 +16,8 @@ void Application::run()
         processMode();
 
         cout << text << endl;
-        cout << hasher.hashString(this->text) << endl;
+        hasher.hashString(this->text);
+        // cout << hasher.hashString(this->text) << endl;
     }
     catch (const std::exception &e)
     {
