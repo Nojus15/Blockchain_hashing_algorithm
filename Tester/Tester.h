@@ -7,6 +7,7 @@
 #include <iterator>
 #include "../Generator/Generator.h"
 #include "../Hasher/Hasher.h"
+#include "../Timer/Timer.h"
 
 using std::cout;
 using std::endl;
@@ -18,10 +19,20 @@ using std::vector;
 typedef string hashVal;
 typedef vector<string> originalVal;
 
+#include <algorithm>
+
+template <typename T>
+void remove_duplicates(std::vector<T> &vec)
+{
+    std::sort(vec.begin(), vec.end());
+    vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
+}
+
 class Tester
 {
 public:
-    void runTests(size_t count, size_t symbolCount, string resFileName);
+    void runCollisionTest(size_t count, size_t symbolCount, string resFileName);
+    void runSpeedTest(size_t symbolCount);
 
 private:
     map<hashVal, originalVal> hashes;
@@ -29,6 +40,9 @@ private:
 
     Generator gen;
     Hasher hasher;
+    Timer timer;
+
+    void testSpeed(size_t symbolCount);
     bool testCollisions(string resFileName);
     void generateStringsAndHashes(size_t count, size_t symbolCount);
 };

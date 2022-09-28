@@ -17,7 +17,9 @@ bool Tester::testCollisions(string resFileName)
     {
         if (el.second.size() > 1)
         {
-            this->collisions.insert(el);
+            remove_duplicates(el.second);
+            if (el.second.size() > 1)
+                this->collisions.insert(el);
         }
     }
     cout << "Number of collisions: " << this->collisions.size() << endl;
@@ -40,9 +42,24 @@ bool Tester::testCollisions(string resFileName)
     out_f.close();
     return true;
 };
+void Tester::testSpeed(size_t symbolCount)
+{
+    string text = gen.genStringstream(symbolCount).str();
 
-void Tester::runTests(size_t count, size_t symbolCount, string resFileName)
+    timer.Start();
+    for (int i = 0; i < 10000; i++)
+    {
+        hasher.hashString(text);
+    }
+    cout << "Average time to generate " << symbolCount << " string: " << timer.Stop() / 10000 << endl;
+}
+
+void Tester::runCollisionTest(size_t count, size_t symbolCount, string resFileName)
 {
     this->generateStringsAndHashes(count, symbolCount);
     this->testCollisions(resFileName);
+}
+void Tester::runSpeedTest(size_t symbolCount)
+{
+    this->testSpeed(symbolCount);
 }
