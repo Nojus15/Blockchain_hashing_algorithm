@@ -47,29 +47,38 @@ void Application::processMode()
     {
     case AppMode::GenFile:
         if (this->argc != 4)
-            throw std::invalid_argument("Invalid argument: -genFile used incorrectly");
+            throw std::invalid_argument("Invalid argument: --genFile used incorrectly");
         Generator gen;
         gen.genFile(argv[2], std::atoi(argv[3]));
         exit(0);
         break;
     case AppMode::HashFile:
         if (this->argc != 3)
-            throw std::invalid_argument("Invalid argument: -hashFile used incorrectly");
+            throw std::invalid_argument("Invalid argument: --hashFile used incorrectly");
         readFile(argv[2]);
         break;
     case AppMode::HashLine:
         if (this->argc != 3)
-            throw std::invalid_argument("Invalid argument: -hashLine used incorrectly");
+            throw std::invalid_argument("Invalid argument: --hashLine used incorrectly");
         this->text = argv[2];
         break;
     case AppMode::TestCollisions:
         if (this->argc != 5)
-            throw std::invalid_argument("Invalid argument: -hashLine used incorrectly");
+            throw std::invalid_argument("Invalid argument: --testCollisions used incorrectly");
         {
             int count = std::atoi(this->argv[2]);
             int symbolCount = std::atoi(this->argv[3]);
             string resFileName = this->argv[4];
-            tester.runTests(count, symbolCount, resFileName);
+            tester.runCollisionTest(count, symbolCount, resFileName);
+            exit(0);
+        }
+        break;
+    case AppMode::TestSpeed:
+        if (this->argc != 3)
+            throw std::invalid_argument("Invalid argument: --testSpeed used incorrectly");
+        {
+            int symbolCount = std::atoi(this->argv[2]);
+            tester.runSpeedTest(symbolCount);
             exit(0);
         }
         break;
@@ -88,27 +97,31 @@ void Application::findMode()
         return;
     }
 
-    if (modeArg == "-genFile")
+    if (modeArg == "--genFile")
     {
         this->mode = AppMode::GenFile;
         return;
     }
 
-    if (modeArg == "-hashFile")
+    if (modeArg == "--hashFile")
     {
         this->mode = AppMode::HashFile;
         return;
     }
-    if (modeArg == "-hashLine")
+    if (modeArg == "--hashLine")
     {
         this->mode = AppMode::HashLine;
         return;
     }
-    if (modeArg == "-testCollisions")
+    if (modeArg == "--testCollisions")
     {
         this->mode = AppMode::TestCollisions;
         return;
     }
-
+    if (modeArg == "--testSpeed")
+    {
+        this->mode = AppMode::TestSpeed;
+        return;
+    }
     throw std::invalid_argument("Mode not found");
 }
