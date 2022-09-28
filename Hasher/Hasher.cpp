@@ -9,11 +9,9 @@ string Hasher::hashString(string stringToHash)
     this->convertToBinary();
     this->makeMultipleOf512();
     this->modifyAddedZeros();
-    cout << "Og: " << binaryTextStr << endl;
-    cout << this->convertBinaryToHex() << endl;
-    // cout << "Hashed: " << this->binaryText.str() << endl;
+    this->convertBinaryToHex();
 
-    return binaryTextStr;
+    return this->hash;
 }
 
 void Hasher::convertToBinary()
@@ -98,7 +96,7 @@ string Hasher::addBinary(string b1, string b2)
     return ss.str();
 };
 
-string Hasher::convertBinaryToHex()
+void Hasher::convertBinaryToHex()
 {
     string res, tmp;
     size_t len = this->binaryTextStr.length() / 4;
@@ -169,12 +167,8 @@ string Hasher::convertBinaryToHex()
         {
             res = res + "f";
         }
-        else
-        {
-            continue;
-        }
     }
-    return res;
+    this->hash = res.substr(0, 64);
 }
 
 // 61616161617373737373737373730810504EE2E6B79A8FE321B42BCE29825EBD5E310E48E6E3022F7C05BFB8982F0D9010FD048148A284E1913272259E875680EAB9

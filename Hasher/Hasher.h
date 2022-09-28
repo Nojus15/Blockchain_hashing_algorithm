@@ -25,6 +25,7 @@ private:
     string text;
     string binaryTextStr;
     stringstream binaryText;
+    string hash;
 
     size_t addedBits = 0;
 
@@ -37,5 +38,5 @@ private:
     string shiftRight(int posCount, string block);
     string shiftLeft(int posCount, string block);
     void modifyAddedZeros();
-    string convertBinaryToHex();
+    void convertBinaryToHex();
 };
