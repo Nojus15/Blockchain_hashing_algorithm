@@ -60,17 +60,16 @@ void Hasher::modifyAddedZeros()
     string s1;
     string s2;
 
-    for (int j = 0; j < 3; j++)
-        for (size_t i = 0; i < binaryTextStr.length(); i += 32)
-        {
-            t1 = ((bitset<32>)this->rotateRight(7, binaryTextStr.substr(i, 32)) ^ (bitset<32>)this->rotateRight(18, binaryTextStr.substr(i, 32)) ^ (bitset<32>)this->shiftRight(3, binaryTextStr.substr(i, 32)));
-            t2 = ((bitset<32>)this->rotateRight(17, binaryTextStr.substr(i, 32)) ^ (bitset<32>)this->rotateRight(19, binaryTextStr.substr(i, 32)) ^ (bitset<32>)this->shiftRight(10, binaryTextStr.substr(i, 32)));
-            t1.flip(2).flip(5).flip(11).flip(17).flip(23).flip(31);
-            t2.flip(3).flip(7).flip(13).flip(19).flip(29).flip(1);
-            s1 = this->addBinary(binaryTextStr.substr(i, 32), t1.to_string());
-            s2 = this->addBinary(binaryTextStr.substr(i / 2, 32), t2.to_string());
-            this->binaryTextStr.replace(i, 32, this->addBinary(s1, s2));
-        }
+    for (size_t i = 0; i < binaryTextStr.length(); i += 32)
+    {
+        t1 = ((bitset<32>)this->rotateRight(7, binaryTextStr.substr(i, 32)) ^ (bitset<32>)this->rotateRight(18, binaryTextStr.substr(i, 32)) ^ (bitset<32>)this->shiftRight(3, binaryTextStr.substr(i, 32)));
+        t2 = ((bitset<32>)this->rotateRight(17, binaryTextStr.substr(i, 32)) ^ (bitset<32>)this->rotateRight(19, binaryTextStr.substr(i, 32)) ^ (bitset<32>)this->shiftRight(10, binaryTextStr.substr(i, 32)));
+        t1.flip(2).flip(5).flip(11).flip(17).flip(23).flip(31);
+        t2.flip(3).flip(7).flip(13).flip(19).flip(29).flip(1);
+        s1 = this->addBinary(binaryTextStr.substr(i, 32), t1.to_string());
+        s2 = this->addBinary(binaryTextStr.substr(i / 2, 32), t2.to_string());
+        this->binaryTextStr.replace(i, 32, this->addBinary(s1, s2));
+    }
 };
 string Hasher::addBinary(string b1, string b2)
 {
@@ -94,7 +93,14 @@ string Hasher::addBinary(string b1, string b2)
 void Hasher::convertBinaryToHex()
 {
     string res, tmp;
-    for (int i = this->binaryTextStr.length(); i > this->binaryTextStr.length() - 64 * 4 - 1; i -= 4)
+
+    size_t seed = 0;
+    for (auto &l : text)
+    {
+        seed += l;
+    }
+    int pos = seed % (this->binaryTextStr.length() - 64 * 4);
+    for (int i = pos; i < pos + 64 * 4; i += 4)
     {
         tmp = this->binaryTextStr.substr(i, 4);
         if (!tmp.compare("0000"))
