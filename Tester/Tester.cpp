@@ -47,12 +47,12 @@ void Tester::testSpeed(size_t symbolCount)
     string text = gen.genStringstream(symbolCount).str();
 
     timer.Start();
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 10; i++)
     {
         hasher.hashString(text);
     }
     double t = timer.Stop();
-    cout << "Average time to generate " << symbolCount << " symbol string: " << t / 100 << "s" << endl;
+    cout << "Average time to hash " << symbolCount << " symbol string: " << t / 10 << "s" << endl;
 }
 
 void Tester::runCollisionTest(size_t count, size_t symbolCount, string resFileName)
