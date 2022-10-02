@@ -92,81 +92,19 @@ string Hasher::addBinary(string b1, string b2)
 
 void Hasher::convertBinaryToHex()
 {
-    string res, tmp;
-
+    string tmp;
+    stringstream res;
     size_t seed = 0;
+
     for (auto &l : text)
-    {
         seed += l;
-    }
+
     int pos = seed % (this->binaryTextStr.length() - 64 * 4);
-    for (int i = pos; i < pos + 64 * 4; i += 4)
+
+    for (int i = 0; i < 4; i++)
     {
-        tmp = this->binaryTextStr.substr(i, 4);
-        if (!tmp.compare("0000"))
-        {
-            res = res + "0";
-        }
-        else if (!tmp.compare("0001"))
-        {
-            res = res + "1";
-        }
-        else if (!tmp.compare("0010"))
-        {
-            res = res + "2";
-        }
-        else if (!tmp.compare("0011"))
-        {
-            res = res + "3";
-        }
-        else if (!tmp.compare("0100"))
-        {
-            res = res + "4";
-        }
-        else if (!tmp.compare("0101"))
-        {
-            res = res + "5";
-        }
-        else if (!tmp.compare("0110"))
-        {
-            res = res + "6";
-        }
-        else if (!tmp.compare("0111"))
-        {
-            res = res + "7";
-        }
-        else if (!tmp.compare("1000"))
-        {
-            res = res + "8";
-        }
-        else if (!tmp.compare("1001"))
-        {
-            res = res + "9";
-        }
-        else if (!tmp.compare("1010"))
-        {
-            res = res + "a";
-        }
-        else if (!tmp.compare("1011"))
-        {
-            res = res + "b";
-        }
-        else if (!tmp.compare("1100"))
-        {
-            res = res + "c";
-        }
-        else if (!tmp.compare("1101"))
-        {
-            res = res + "d";
-        }
-        else if (!tmp.compare("1110"))
-        {
-            res = res + "e";
-        }
-        else if (!tmp.compare("1111"))
-        {
-            res = res + "f";
-        }
+        bitset<64> hashSet(this->binaryTextStr.substr(pos + 64 * i, 64));
+        res << hex << hashSet.to_ullong();
     }
-    this->hash = res;
+    this->hash = res.str();
 }

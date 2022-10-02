@@ -10,6 +10,7 @@
 using std::bitset;
 using std::cout;
 using std::endl;
+using std::hex;
 using std::string;
 using std::stringstream;
 
