@@ -32,6 +32,7 @@ class Tester
 {
 public:
     void runCollisionTest(size_t count, size_t symbolCount, string resFileName);
+    void runCollisionTestByPairs(string resFileName);
     void runSpeedTest(size_t symbolCount);
 
 private:
@@ -43,6 +44,7 @@ private:
     Timer timer;
 
     void testSpeed(size_t symbolCount);
-    bool testCollisions(string resFileName);
+    void testCollisions(string resFileName);
+    int testCollisionsByPairs(stringstream &out_ss, size_t symbolCount);
     void generateStringsAndHashes(size_t count, size_t symbolCount);
 };

@@ -16,6 +16,7 @@ enum AppMode
     HashLine,
     TestCollisions,
     TestSpeed,
+    TestCollisionsByPairs,
 };
 
 class Application

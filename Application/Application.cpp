@@ -14,7 +14,6 @@ void Application::run()
     {
         findMode();
         processMode();
-        cout << hasher.hashString(this->text) << endl;
     }
     catch (const std::exception &e)
     {
@@ -47,17 +46,18 @@ void Application::processMode()
             throw std::invalid_argument("Invalid argument: --genFile used incorrectly");
         Generator gen;
         gen.genFile(argv[2], std::atoi(argv[3]));
-        exit(0);
         break;
     case AppMode::HashFile:
         if (this->argc != 3)
             throw std::invalid_argument("Invalid argument: --hashFile used incorrectly");
         readFile(argv[2]);
+        cout << hasher.hashString(this->text, true) << endl;
         break;
     case AppMode::HashLine:
         if (this->argc != 3)
             throw std::invalid_argument("Invalid argument: --hashLine used incorrectly");
         this->text = argv[2];
+        cout << hasher.hashString(this->text, true) << endl;
         break;
     case AppMode::TestCollisions:
         if (this->argc != 5)
@@ -67,7 +67,6 @@ void Application::processMode()
             int symbolCount = std::atoi(this->argv[3]);
             string resFileName = this->argv[4];
             tester.runCollisionTest(count, symbolCount, resFileName);
-            exit(0);
         }
         break;
     case AppMode::TestSpeed:
@@ -76,10 +75,16 @@ void Application::processMode()
         {
             int symbolCount = std::atoi(this->argv[2]);
             tester.runSpeedTest(symbolCount);
-            exit(0);
         }
         break;
-
+    case AppMode::TestCollisionsByPairs:
+        if (this->argc != 3)
+            throw std::invalid_argument("Invalid argument: --testCollisionsByPairs used incorrectly");
+        {
+            string resFileName = this->argv[2];
+            tester.runCollisionTestByPairs(resFileName);
+        }
+        break;
     default:
         break;
     }
@@ -118,6 +123,11 @@ void Application::findMode()
     if (modeArg == "--testSpeed")
     {
         this->mode = AppMode::TestSpeed;
+        return;
+    }
+    if (modeArg == "--testCollisionsByPairs")
+    {
+        this->mode = AppMode::TestCollisionsByPairs;
         return;
     }
     throw std::invalid_argument("Mode not found");
