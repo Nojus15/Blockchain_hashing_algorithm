@@ -6,6 +6,7 @@
 #include <bitset>
 #include <sstream>
 #include <iomanip>
+#include "../Timer/Timer.h"
 
 using std::bitset;
 using std::cout;
@@ -17,11 +18,12 @@ using std::stringstream;
 class Hasher
 {
 public:
-    string hashString(string stringToHash);
+    string hashString(string stringToHash, bool includeTimer = false);
 
 private:
     const static int hashLength = 64;
     const string hashSymbols = "0123456789abcdef";
+    Timer timer;
 
     string text;
     string binaryTextStr;
