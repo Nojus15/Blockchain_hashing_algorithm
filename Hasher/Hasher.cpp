@@ -1,21 +1,25 @@
 #include "Hasher.h"
 
-string Hasher::hashString(string stringToHash, bool includeTimer)
+string Hasher::hashString(string stringToHash, bool coutTime)
 {
     if (stringToHash.empty())
         throw std::invalid_argument("No text provided");
 
-    if (includeTimer)
-        timer.Start();
+    timer.Start();
     this->text = stringToHash;
     this->convertToBinary();
     this->makeMultipleOf512();
     this->modifyAddedZeros();
     this->convertBinaryToHex();
-    if (includeTimer)
-        cout << "Time taken to hash string: " << timer.Stop() << " s" << endl;
+    this->timeTaken = timer.Stop();
+    if (coutTime)
+        cout << "Time taken to hash string: " << timeTaken << " s" << endl;
 
     return this->hash;
+}
+double Hasher::getTimeTaken()
+{
+    return this->timeTaken;
 }
 
 void Hasher::convertToBinary()

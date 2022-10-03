@@ -18,7 +18,8 @@ using std::stringstream;
 class Hasher
 {
 public:
-    string hashString(string stringToHash, bool includeTimer = false);
+    string hashString(string stringToHash, bool coutTime = false);
+    double getTimeTaken();
 
 private:
     const static int hashLength = 64;
@@ -29,6 +30,7 @@ private:
     string binaryTextStr;
     stringstream binaryText;
     string hash;
+    double timeTaken = 0;
 
     size_t addedBits = 0;
 
