@@ -20,23 +20,6 @@ void Application::run()
         std::cerr << e.what() << '\n';
     }
 }
-void Application::openFile(std::ifstream &open_f, string file_name)
-{
-    string dir = "txt_files/" + file_name;
-    open_f.open(dir);
-    if (open_f.fail())
-        throw std::invalid_argument("File \"" + file_name + "\" not found");
-}
-
-void Application::readFile(string file_name)
-{
-    std::ifstream file;
-    openFile(file, file_name);
-
-    std::stringstream fileText;
-    fileText << file.rdbuf();
-    this->text = fileText.str();
-}
 void Application::processMode()
 {
     switch (this->mode)
@@ -50,7 +33,7 @@ void Application::processMode()
     case AppMode::HashFile:
         if (this->argc != 3)
             throw std::invalid_argument("Invalid argument: --hashFile used incorrectly");
-        readFile(argv[2]);
+        this->text = file.readFile(argv[2]).str();
         cout << hasher.hashString(this->text, true) << endl;
         break;
     case AppMode::HashLine:
@@ -132,3 +115,5 @@ void Application::findMode()
     }
     throw std::invalid_argument("Mode not found");
 }
+
+// std::getline(my_buffer, line);

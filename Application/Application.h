@@ -2,6 +2,7 @@
 #include "../Hasher/Hasher.h"
 #include "../Generator/Generator.h"
 #include "../Tester/Tester.h"
+#include "../File/File.h"
 #include <string>
 
 using std::cin;
@@ -28,9 +29,8 @@ private:
     AppMode mode;
     Hasher hasher;
     Tester tester;
+    File file;
 
-    void openFile(std::ifstream &open_f, string file_name);
-    void readFile(string file_name);
     void processMode();
     void findMode();
 
