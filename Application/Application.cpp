@@ -68,6 +68,16 @@ void Application::processMode()
             tester.runCollisionTestByPairs(resFileName);
         }
         break;
+    case AppMode::TestKonstitucija:
+        if (this->argc != 2)
+            throw std::invalid_argument("Invalid argument: --testKonstitucija used incorrectly");
+        tester.testKonstitucija();
+        break;
+    case AppMode::TestAvalanche:
+        if (this->argc != 2)
+            throw std::invalid_argument("Invalid argument: --testAvalanche used incorrectly");
+        tester.testAvalanche();
+        break;
     default:
         break;
     }
@@ -111,6 +121,16 @@ void Application::findMode()
     if (modeArg == "--testCollisionsByPairs")
     {
         this->mode = AppMode::TestCollisionsByPairs;
+        return;
+    }
+    if (modeArg == "--testKonstitucija")
+    {
+        this->mode = AppMode::TestKonstitucija;
+        return;
+    }
+    if (modeArg == "--testAvalanche")
+    {
+        this->mode = AppMode::TestAvalanche;
         return;
     }
     throw std::invalid_argument("Mode not found");

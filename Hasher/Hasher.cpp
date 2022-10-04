@@ -7,6 +7,7 @@ string Hasher::hashString(string stringToHash, bool coutTime)
 
     timer.Start();
     this->text = stringToHash;
+    this->calcSeed();
     this->convertToBinary();
     this->makeMultipleOf512();
     this->modifyAddedZeros();
@@ -57,11 +58,22 @@ string Hasher::shiftLeft(int posCount, string block)
     size_t length = block.length();
     return block.substr(posCount, length - posCount) + std::string(posCount, '0');
 };
+void Hasher::calcSeed()
+{
+    this->seed = (int)this->text[0];
 
+    for (auto &l : text)
+    {
+        seed += ((int)l * (seed % 3 + 1));
+    }
+}
 void Hasher::modifyAddedZeros()
 {
     this->binaryTextStr = this->binaryText.str();
     this->binaryText.str("");
+
+    for (size_t i = 0; i < this->binaryTextStr.length() - 1; i += (this->seed % 13 + 7))
+        this->binaryTextStr[i] == '1' ? this->binaryTextStr[i] = '0' : this->binaryTextStr[i] = '1';
 
     std::bitset<32> t1;
     std::bitset<32> t2;
@@ -102,17 +114,26 @@ void Hasher::convertBinaryToHex()
 {
     string tmp;
     stringstream res;
-    size_t seed = 0;
-
-    for (auto &l : text)
-        seed += l;
-
-    int pos = seed % (this->binaryTextStr.length() - 64 * 4);
+    string t;
+    int pos = this->seed % (this->binaryTextStr.length() - 64 * 4);
+    // cout << "Pos: " << pos << " Seed:" << seed << endl;
+    // cout << "Lenght: " << this->binaryTextStr.length() << endl;
 
     for (int i = 0; i < 4; i++)
     {
-        bitset<64> hashSet(this->binaryTextStr.substr(pos + 64 * i, 64));
+        t = this->binaryTextStr.substr(pos + 64 * i, 64);
+        if (t.substr(0, 4) == "0000")
+            t[0] = '1';
+        bitset<64> hashSet(t);
+        // cout << "hashSet size: " << hashSet.size() << " " << this->binaryTextStr.substr(pos + 64 * i, 64) << " " << hex << hashSet.to_ullong() << endl;
         res << hex << hashSet.to_ullong();
     }
     this->hash = res.str();
 }
+// e4d5160dd3
+// 7e7c5f9ac3
+// 6405cf0415
+// a4862cb0e7
+// d08acb3550
+// 11036a63c5
+// d16f

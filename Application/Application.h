@@ -1,8 +1,8 @@
 #include <iostream>
 #include "../Hasher/Hasher.h"
 #include "../Generator/Generator.h"
-#include "../Tester/Tester.h"
 #include "../File/File.h"
+#include "../Tester/Tester.h"
 #include <string>
 
 using std::cin;
@@ -18,6 +18,8 @@ enum AppMode
     TestCollisions,
     TestSpeed,
     TestCollisionsByPairs,
+    TestKonstitucija,
+    TestAvalanche,
 };
 
 class Application

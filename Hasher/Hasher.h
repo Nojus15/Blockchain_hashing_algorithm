@@ -31,6 +31,7 @@ private:
     stringstream binaryText;
     string hash;
     double timeTaken = 0;
+    size_t seed;
 
     size_t addedBits = 0;
 
@@ -44,4 +45,5 @@ private:
     string shiftLeft(int posCount, string block);
     void modifyAddedZeros();
     void convertBinaryToHex();
+    void calcSeed();
 };
