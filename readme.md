@@ -8,12 +8,12 @@
 
 | Command                                         | Description                                                                                                                                |
 |-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
-| --gf { fileName } { symbolCount }               | Generate new file with random string of { symbolCount } length                                                                             |
-| --hf { fileName }                               | Hash file text                                                                                                                             |
-| --hl { stringToHash }                           | Hash string provided in the command line                                                                                                   |
-| --tc { count } { symbolLength } { resFileName } | Runs collision test that generates { count } of string with length of { symbolCount } and prints out the results to the { resFile }. Results file structure: hash, string count that have the same hash, all strings that have the same hash |
-| --tcp { resFileName }                           | Runs collision test by pairs and print to the { resFileName } with the same structure as "--tc"                                            |
-| --ts { symolCount }                             | Prints average time taken to generate { symbolCount } length string                                                                        |
+| --gf {fileName} {symbolCount}               | Generate new file with random string of { symbolCount } length                                                                             |
+| --hf {fileName}                               | Hash file text                                                                                                                             |
+| --hl {stringToHash}                           | Hash string provided in the command line                                                                                                   |
+| --tc {count} {symbolLength} {resFileName} | Runs collision test that generates { count } of string with length of { symbolCount } and prints out the results to the { resFile }. Results file structure: hash, string count that have the same hash, all strings that have the same hash |
+| --tcp {resFileName}                           | Runs collision test by pairs and print to the { resFileName } with the same structure as "--tc"                                            |
+| --ts {symolCount}                             | Prints average time taken to generate { symbolCount } length string                                                                        |
 | --tk                                            | Runs Konstitucija test. Prints to the console lines hashed and time taken to hash.                                                         |
 | --ta                                            | Runs avalanche tests. Prints max min and average differences in percents                                                                   |
 
@@ -54,9 +54,11 @@ EndOfAlgorithm
 ```
 ## Performance
 
-| String length   | 0.00040018 | 0.00169992 | 0.0151998 | 0.148316 | 1.466   | 14.5891   |
+| String length   | 100	       | 1000	    | 10000	    | 100000   | 1000000 |	10000000 |
 |-----------------|------------|------------|-----------|----------|---------|-----------|  
-| Time in seconds | 100	       | 1000	    | 10000	    | 100000   | 1000000 |	10000000 |
+| Time in seconds | 0.00040018 | 0.00169992 | 0.0151998 | 0.148316 | 1.466   | 14.5891   |
+
+
 
 ## Strengths and weaknesses
 
