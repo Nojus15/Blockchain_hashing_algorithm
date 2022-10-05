@@ -26,25 +26,25 @@ void Application::processMode()
     {
     case AppMode::GenFile:
         if (this->argc != 4)
-            throw std::invalid_argument("Invalid argument: --genFile used incorrectly");
+            throw std::invalid_argument("Invalid argument: --gf used incorrectly");
         Generator gen;
         gen.genFile(argv[2], std::atoi(argv[3]));
         break;
     case AppMode::HashFile:
         if (this->argc != 3)
-            throw std::invalid_argument("Invalid argument: --hashFile used incorrectly");
+            throw std::invalid_argument("Invalid argument: --hf used incorrectly");
         this->text = file.readFile(argv[2]).str();
         cout << hasher.hashString(this->text, true) << endl;
         break;
     case AppMode::HashLine:
         if (this->argc != 3)
-            throw std::invalid_argument("Invalid argument: --hashLine used incorrectly");
+            throw std::invalid_argument("Invalid argument: --hl used incorrectly");
         this->text = argv[2];
         cout << hasher.hashString(this->text, true) << endl;
         break;
     case AppMode::TestCollisions:
         if (this->argc != 5)
-            throw std::invalid_argument("Invalid argument: --testCollisions used incorrectly");
+            throw std::invalid_argument("Invalid argument: --tc used incorrectly");
         {
             int count = std::atoi(this->argv[2]);
             int symbolCount = std::atoi(this->argv[3]);
@@ -54,7 +54,7 @@ void Application::processMode()
         break;
     case AppMode::TestSpeed:
         if (this->argc != 3)
-            throw std::invalid_argument("Invalid argument: --testSpeed used incorrectly");
+            throw std::invalid_argument("Invalid argument: --ts used incorrectly");
         {
             int symbolCount = std::atoi(this->argv[2]);
             tester.runSpeedTest(symbolCount);
@@ -62,7 +62,7 @@ void Application::processMode()
         break;
     case AppMode::TestCollisionsByPairs:
         if (this->argc != 3)
-            throw std::invalid_argument("Invalid argument: --testCollisionsByPairs used incorrectly");
+            throw std::invalid_argument("Invalid argument: --tcp used incorrectly");
         {
             string resFileName = this->argv[2];
             tester.runCollisionTestByPairs(resFileName);
@@ -70,12 +70,12 @@ void Application::processMode()
         break;
     case AppMode::TestKonstitucija:
         if (this->argc != 2)
-            throw std::invalid_argument("Invalid argument: --testKonstitucija used incorrectly");
+            throw std::invalid_argument("Invalid argument: --tk used incorrectly");
         tester.testKonstitucija();
         break;
     case AppMode::TestAvalanche:
         if (this->argc != 2)
-            throw std::invalid_argument("Invalid argument: --testAvalanche used incorrectly");
+            throw std::invalid_argument("Invalid argument: --ta used incorrectly");
         tester.testAvalanche();
         break;
     default:
@@ -92,43 +92,43 @@ void Application::findMode()
         return;
     }
 
-    if (modeArg == "--genFile")
+    if (modeArg == "--gf")
     {
         this->mode = AppMode::GenFile;
         return;
     }
 
-    if (modeArg == "--hashFile")
+    if (modeArg == "--hf")
     {
         this->mode = AppMode::HashFile;
         return;
     }
-    if (modeArg == "--hashLine")
+    if (modeArg == "--hl")
     {
         this->mode = AppMode::HashLine;
         return;
     }
-    if (modeArg == "--testCollisions")
+    if (modeArg == "--tc")
     {
         this->mode = AppMode::TestCollisions;
         return;
     }
-    if (modeArg == "--testSpeed")
+    if (modeArg == "--ts")
     {
         this->mode = AppMode::TestSpeed;
         return;
     }
-    if (modeArg == "--testCollisionsByPairs")
+    if (modeArg == "--tcp")
     {
         this->mode = AppMode::TestCollisionsByPairs;
         return;
     }
-    if (modeArg == "--testKonstitucija")
+    if (modeArg == "--tk")
     {
         this->mode = AppMode::TestKonstitucija;
         return;
     }
-    if (modeArg == "--testAvalanche")
+    if (modeArg == "--ta")
     {
         this->mode = AppMode::TestAvalanche;
         return;
